@@ -5,7 +5,7 @@ let colors = [], colors2, colors3;
 let iterator = {val: 0};
 let iterator2 = {val: 0};
 let iterator3 = {val: 0};
-let scale = 3;
+let scale = 2;
 
 function setup() {
 	cnv = createCanvas(windowWidth, windowHeight);
@@ -24,9 +24,9 @@ function setup() {
 
 function draw() {
 	if (iterator.val < colors.length) {
-		runSort(colors2, iterator2, "saturation", getSaturation, 0, height/3);
-		runSort(colors, iterator, "hue", getHue,height/3, height - height/3);
-		runSort(colors3, iterator3, "brightness", getBrightness, height - height/3, height);
+		bubbleSort(colors2, iterator2, "saturation", getSaturation, 0, height/3);
+		bubbleSort(colors, iterator, "hue", getHue,height/3, height - height/3);
+		bubbleSort(colors3, iterator3, "brightness", getBrightness, height - height/3, height);
 	}
 
 	else {
@@ -53,7 +53,17 @@ function getBrightness(color){
 	return color._getBrightness();
 }
 
-function runSort(array, iterator, sortingMethod, fn, yStart, yEnd){
+function drawLines(array, yStart, yEnd){
+	strokeCap(SQUARE);
+	strokeWeight(scale);
+
+	for (let i = 0; i < array.length; i++) {
+		stroke(array[i]);
+		line(i * scale, yStart, i * scale, yEnd);
+	}
+}
+
+function bubbleSort(array, iterator, sortingMethod, fn, yStart, yEnd){
 	for (let j = 0; j < array.length - iterator.val - 1; j++) {
 			let a = array[j];
 			let b = array[j + 1];
@@ -66,12 +76,5 @@ function runSort(array, iterator, sortingMethod, fn, yStart, yEnd){
 	if (iterator.val === array.length){
 		print(`finished sorting by ${sortingMethod}`);
 	}
-
-	strokeCap(SQUARE);
-	strokeWeight(scale);
-
-	for (let i = 0; i < array.length; i++) {
-		stroke(array[i]);
-		line(i * scale, yStart, i * scale, yEnd);
-	}
+	drawLines(array, yStart, yEnd);
 }
