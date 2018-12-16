@@ -1,6 +1,8 @@
 let values = [];
-let i = 0,
-	j = 0;
+let rIterator = 0,
+	gIterator = 0,
+	bIterator = 0,
+	brightnessIterator = 0;
 
 function setup() {
 	createCanvas(800, 500);
@@ -9,14 +11,59 @@ function setup() {
 		let r = int(random(255));
 		let g = int(random(255));
 		let b = int(random(255));
-		values.push(color(r, r, r)); // GREYSCALE TEST
+		values.push(color(r, g, b));
 	}
 }
 
 function draw() {
 
-	if (i < values.length) {
-		for (let j = 0; j < values.length - i - 1; j++) {
+	if (rIterator < values.length) {
+		for (let j = 0; j < values.length - rIterator - 1; j++) {
+			let a = values[j].levels;
+			let b = values[j + 1].levels;
+
+			if (getRed(a) > getRed(b)){
+				swap(values, j, j + 1);
+			}
+		}
+		rIterator++;
+		if (rIterator === values.length){
+			print("finished sorting by red");
+		} 
+	} 
+
+	else if (gIterator < values.length) {
+		for (let j = 0; j < values.length - gIterator - 1; j++) {
+			let a = values[j].levels;
+			let b = values[j + 1].levels;
+
+			if (getGreen(a) > getGreen(b)){
+				swap(values, j, j + 1);
+			}
+		}
+		gIterator++;
+		if (gIterator === values.length){
+			print("finished sorting by green");
+		} 
+	}
+
+	else if (bIterator < values.length) {
+		for (let j = 0; j < values.length - bIterator - 1; j++) {
+			let a = values[j].levels;
+			let b = values[j + 1].levels;
+
+			if (getBlue(a) > getBlue(b)){
+				swap(values, j, j + 1);
+			}
+		}
+		bIterator++;
+ 		if (bIterator === values.length){
+			print("finished sorting by blue");
+		} 
+	}
+
+	else if (brightnessIterator < values.length) {
+		for (let j = 0; j < values.length - brightnessIterator - 1; j++) {
 			let a = values[j].levels;
 			let b = values[j + 1].levels;
 
@@ -24,14 +71,20 @@ function draw() {
 				swap(values, j, j + 1);
 			}
 		}
-	} 
+		brightnessIterator++;
+ 		if (brightnessIterator === values.length){
+			print("finished sorting by brightness");
+		} 
+	}
 
 	else {
 		print("finished");
-		noLoop();
+		rIterator = 0;
+		gIterator = 0;
+		bIterator = 0;
+		brightnessIterator = 0;
+		// noLoop();
 	}
-
-	i++; // global i
 
 	for (let i = 0; i < values.length; i++) {
 		stroke(values[i]); // private i
