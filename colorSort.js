@@ -1,88 +1,73 @@
 let values = [];
-let rIterator = 0,
-	gIterator = 0,
+let hIterator = 0,
+	sIterator = 0,
 	bIterator = 0,
 	brightnessIterator = 0;
 
 function setup() {
-	createCanvas(800, 500);
+	createCanvas(300, 500);
+	colorMode(HSB);
 
 	for (let i = 0; i < width; i++) {
-		let r = int(random(255));
-		let g = int(random(255));
+		let h = int(random(255));
+		let s = int(random(255));
 		let b = int(random(255));
-		values.push(color(r, g, b));
+		values.push(color(h, s, b));
 	}
 }
 
 function draw() {
 
-	if (rIterator < values.length) {
-		for (let j = 0; j < values.length - rIterator - 1; j++) {
-			let a = values[j].levels;
-			let b = values[j + 1].levels;
+	if (hIterator < values.length) {
+		for (let j = 0; j < values.length - hIterator - 1; j++) {
+			let a = values[j];
+			let b = values[j + 1];
 
-			if (getRed(a) > getRed(b)){
+			if (getHue(a) > getHue(b)){
 				swap(values, j, j + 1);
 			}
 		}
-		rIterator++;
-		if (rIterator === values.length){
-			print("finished sorting by red");
+		hIterator++;
+		if (hIterator === values.length){
+			print("finished sorting by hue");
 		} 
 	} 
 
-	else if (gIterator < values.length) {
-		for (let j = 0; j < values.length - gIterator - 1; j++) {
-			let a = values[j].levels;
-			let b = values[j + 1].levels;
+	else if (sIterator < values.length) {
+		for (let j = 0; j < values.length - sIterator - 1; j++) {
+			let a = values[j];
+			let b = values[j + 1];
 
-			if (getGreen(a) > getGreen(b)){
+			if (getSaturation(a) > getSaturation(b)){
 				swap(values, j, j + 1);
 			}
 		}
-		gIterator++;
-		if (gIterator === values.length){
-			print("finished sorting by green");
+		sIterator++;
+		if (sIterator === values.length){
+			print("finished sorting by saturation");
 		} 
 	}
 
 	else if (bIterator < values.length) {
 		for (let j = 0; j < values.length - bIterator - 1; j++) {
-			let a = values[j].levels;
-			let b = values[j + 1].levels;
-
-			if (getBlue(a) > getBlue(b)){
-				swap(values, j, j + 1);
-			}
-		}
-		bIterator++;
- 		if (bIterator === values.length){
-			print("finished sorting by blue");
-		} 
-	}
-
-	else if (brightnessIterator < values.length) {
-		for (let j = 0; j < values.length - brightnessIterator - 1; j++) {
-			let a = values[j].levels;
-			let b = values[j + 1].levels;
+			let a = values[j];
+			let b = values[j + 1];
 
 			if (getBrightness(a) > getBrightness(b)){
 				swap(values, j, j + 1);
 			}
 		}
-		brightnessIterator++;
- 		if (brightnessIterator === values.length){
+		bIterator++;
+ 		if (bIterator === values.length){
 			print("finished sorting by brightness");
 		} 
 	}
 
 	else {
 		print("finished");
-		rIterator = 0;
-		gIterator = 0;
+		hIterator = 0;
+		sIterator = 0;
 		bIterator = 0;
-		brightnessIterator = 0;
 		// noLoop();
 	}
 
@@ -98,24 +83,16 @@ function swap(array, a, b) {
 	array[b] = temp;
 }
 
+function getHue(color){
+	return color._getHue();
+}
+
+function getSaturation(color){
+	return color._getSaturation();
+}
+
 function getBrightness(color){
-	let sum = 0;
-	color.forEach((channel) => {
-		sum += channel;
-	});	
-	return sum;
-}
-
-function getRed(color){
-	return color[0];
-}
-
-function getGreen(color){
-	return color[1];
-}
-
-function getBlue(color){
-	return color[2];
+	return color._getBrightness();
 }
 
 function getAvgDiff(a, b){
