@@ -24,8 +24,8 @@ function setup() {
 
 function draw() {
 	if (iterator.val < colors.length) {
-		runSort(colors, iterator, "hue", getHue, 0, height/3);
-		runSort(colors2, iterator2, "saturation", getSaturation, height/3, height - height/3);
+		runSort(colors2, iterator2, "saturation", getSaturation, 0, height/3);
+		runSort(colors, iterator, "hue", getHue,height/3, height - height/3);
 		runSort(colors3, iterator3, "brightness", getBrightness, height - height/3, height);
 	}
 
