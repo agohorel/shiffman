@@ -5,7 +5,7 @@ let colors = [], colors2, colors3;
 let iterator = {val: 0};
 let iterator2 = {val: 0};
 let iterator3 = {val: 0};
-let scale = 2;
+let scale = 3;
 
 function setup() {
 	cnv = createCanvas(windowWidth, windowHeight);
@@ -67,6 +67,7 @@ function runSort(array, iterator, sortingMethod, fn, yStart, yEnd){
 		print(`finished sorting by ${sortingMethod}`);
 	}
 
+	strokeCap(SQUARE);
 	strokeWeight(scale);
 
 	for (let i = 0; i < array.length; i++) {
