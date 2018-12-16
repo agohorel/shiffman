@@ -1,13 +1,17 @@
+p5.disableFriendlyErrors = true;
+
+let cnv;
 let colors = [], colors2, colors3;
 let iterator = {val: 0};
 let iterator2 = {val: 0};
 let iterator3 = {val: 0};
+let scale = 2;
 
 function setup() {
-	createCanvas(800, 500);
+	cnv = createCanvas(windowWidth, windowHeight);
 	colorMode(HSB);
 
-	for (let i = 0; i < width; i++) {
+	for (let i = 0; i < width/scale; i++) {
 		let h = int(random(255));
 		let s = int(random(255));
 		let b = int(random(255));
@@ -63,8 +67,10 @@ function runSort(array, iterator, sortingMethod, fn, yStart, yEnd){
 		print(`finished sorting by ${sortingMethod}`);
 	}
 
+	strokeWeight(scale);
+
 	for (let i = 0; i < array.length; i++) {
 		stroke(array[i]);
-		line(i, yStart, i, yEnd);
+		line(i * scale, yStart, i * scale, yEnd);
 	}
 }
