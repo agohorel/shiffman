@@ -5,7 +5,7 @@ let hIterator = 0,
 	brightnessIterator = 0;
 
 function setup() {
-	createCanvas(300, 500);
+	createCanvas(800, 500);
 	colorMode(HSB);
 
 	for (let i = 0; i < width; i++) {
@@ -65,10 +65,11 @@ function draw() {
 
 	else {
 		print("finished");
-		hIterator = 0;
-		sIterator = 0;
-		bIterator = 0;
-		// noLoop();
+		// reset to zero (and comment out noLoop()) if you want to loop infinitely
+		// hIterator = 0;
+		// sIterator = 0;
+		// bIterator = 0;
+		noLoop();
 	}
 
 	for (let i = 0; i < values.length; i++) {
