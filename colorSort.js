@@ -12,9 +12,9 @@ function setup() {
 	colorMode(HSB);
 
 	for (let i = 0; i < width/scale; i++) {
-		let h = int(random(255));
-		let s = int(random(255));
-		let b = int(random(255));
+		let h = int(random(360));
+		let s = int(random(100));
+		let b = int(random(100));
 		colors.push(color(h, s, b));
 	}
 
