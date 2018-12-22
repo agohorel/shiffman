@@ -5,14 +5,14 @@ let colors = [], colors2, colors3;
 let iterator = {val: 0};
 let iterator2 = {val: 0};
 let iterator3 = {val: 0};
-let scale = 2;
+let scale = 3;
 
 function setup() {
 	cnv = createCanvas(windowWidth, windowHeight);
 	colorMode(HSB);
 
 	for (let i = 0; i < width/scale; i++) {
-		let h = int(random(360));
+		let h = int(random(180, 360));
 		let s = int(random(100));
 		let b = int(random(100));
 		colors.push(color(h, s, b));
