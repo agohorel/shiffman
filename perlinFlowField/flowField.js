@@ -1,5 +1,5 @@
 let increment = .1;
-let scale = 10;
+let scale = 20;
 let cols, rows;
 let zOffset = 0;
 let particles = new Array(500);
@@ -8,7 +8,7 @@ let flowField = [];
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	pixelDensity(1);
-	background(0);
+	background(227, 32, 64);
 	noiseSeed(12);
 
 	cols = floor(width / scale);
@@ -33,6 +33,7 @@ function draw() {
 			v.setMag(random(10));
 			flowField[index] = v;
 			yOffset += increment;
+			// showNoiseField(x, y, v);
 		}
 		xOffset += increment;
 		zOffset += increment * 0.0001;
@@ -126,8 +127,8 @@ function Particle() {
 	}
 }
 
-function showNoiseField(){
-	stroke(0);
+function showNoiseField(x, y, v){
+	stroke(255);
 	push();
 	translate(x * scale, y * scale);
 	rotate(v.heading());
