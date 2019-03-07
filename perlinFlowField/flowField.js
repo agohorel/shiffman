@@ -9,7 +9,8 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	pixelDensity(1);
 	background(227, 32, 64);
-	noiseSeed(12);
+	colorMode(HSB, 100);
+	noiseSeed(16);
 
 	cols = floor(width / scale);
 	rows = floor(height / scale);
@@ -109,11 +110,16 @@ function Particle() {
 	}
 
 	this.display = function() {
-		let xScaled = map(this.pos.x, 0, width, 0, 127);
-		let yScaled = map(this.pos.y, 0, height, 0, 127);
-		let variation = random(-10, 10);
+		let xScaled = map(this.pos.x, 0, width, 0, 180);
+		let yScaled = map(this.pos.y, 0, height, 0, 180);
+		let variation = random(-20, 20);
 
-		stroke(xScaled + variation, 0 + variation, yScaled + variation, xScaled + yScaled * .001);
+		// stroke(xScaled + variation, 0 + variation, yScaled + variation, xScaled + yScaled * .001);
+		stroke((xScaled + yScaled) + variation, 
+			    xScaled + variation * .25, 
+			    yScaled + variation * .25, 
+			    xScaled + yScaled * .5);
+		
 		strokeWeight(this.thickness);
 		// line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
 		// line(width - this.prevPos.x, height - this.prevPos.y, width - this.pos.x, height - this.pos.y);
