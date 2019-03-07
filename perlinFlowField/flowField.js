@@ -10,7 +10,7 @@ function setup() {
 	pixelDensity(1);
 	background(227, 32, 64);
 	colorMode(HSB, 100);
-	noiseSeed(16);
+	noiseSeed(2018);
 
 	cols = floor(width / scale);
 	rows = floor(height / scale);
