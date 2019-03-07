@@ -36,6 +36,7 @@ function draw() {
 		xOffset += increment;
 		zOffset += increment * 0.0001;
 	}
+	
 
 	for (let i = 0; i < particles.length; i++) {
 		particles[i].follow(flowField);
@@ -53,6 +54,7 @@ function Particle() {
 	this.acc = createVector(0, 0);
 	this.maxSpeed = 4;
 	this.prevPos = this.pos.copy();
+	this.thickness = 1;
 
 	this.follow = function(vectors) {
 		// get the grid section for each vector
@@ -73,6 +75,7 @@ function Particle() {
 		this.vel.limit(this.maxSpeed);
 		this.pos.add(this.vel);
 		this.acc.mult(0);
+		this.thickness = this.vel.x + this.vel.y;
 	}
 
 	this.updatePrevPos = function() {
@@ -105,7 +108,10 @@ function Particle() {
 	this.display = function() {
 		let xScaled = map(this.pos.x, 0, width, 0, 127);
 		let yScaled = map(this.pos.y, 0, height, 0, 127);
-		stroke(xScaled, 0, yScaled, xScaled + yScaled * .5);
+		let variation = random(-10, 10);
+
+		stroke(xScaled + variation, 0 + variation, yScaled + variation, xScaled + yScaled * .5);
+		strokeWeight(this.thickness);
 		line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
 		this.updatePrevPos();
 	}
@@ -116,7 +122,6 @@ function showNoiseField(){
 	push();
 	translate(x * scale, y * scale);
 	rotate(v.heading());
-	strokeWeight(1);
 	line(0, 0, scale, 0);
 	pop();
 }
